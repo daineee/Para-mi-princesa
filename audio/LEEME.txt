@@ -1,0 +1,8 @@
+Coloca aquí tu canción con el nombre exacto:
+
+cancion.mp3
+
+Si quieres usar otro nombre o formato (por ejemplo "cancion.ogg"),
+abre index.html y cambia el atributo src de la etiqueta <audio>:
+
+<audio id="musica-fondo" src="audio/tu-archivo.mp3" loop preload="auto"></audio>

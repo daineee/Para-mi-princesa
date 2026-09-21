@@ -1,0 +1,194 @@
+/* ============================================
+   RESET Y BASE
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* ============================================
+   PARTÍCULAS DE FONDO (canvas)
+   ============================================ */
+#particulas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* ============================================
+   VIÑETA - da profundidad y ambiente oscuro
+   ============================================ */
+.vineta {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+}
+
+/* ============================================
+   CONTENEDOR DE LA LLUVIA DE FOTOS
+   ============================================ */
+#lluvia-fotos {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.foto {
+  position: absolute;
+  top: -300px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 0 15px rgba(255, 215, 180, 0.25),
+    0 0 40px rgba(0, 0, 0, 0.6);
+  filter: brightness(0.92) saturate(0.95);
+  animation-name: caer;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+  transition: filter 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  cursor: pointer;
+}
+
+.foto:hover {
+  /* Se pausa la caída mientras el mouse está encima, sin tocar su
+     posición/transform (eso era lo que causaba el parpadeo raro) */
+  animation-play-state: paused;
+  filter: brightness(1.2) saturate(1.15);
+  border-color: rgba(255, 225, 175, 0.55);
+  box-shadow:
+    0 0 22px rgba(255, 225, 180, 0.6),
+    0 0 50px rgba(255, 205, 140, 0.4);
+  z-index: 10;
+}
+
+@keyframes caer {
+  0% {
+    transform: translateY(-20vh) rotate(var(--rot-inicio));
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh) rotate(var(--rot-fin));
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   MENSAJE DE INTRODUCCIÓN
+   ============================================ */
+#intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  background: #000;
+  pointer-events: none;
+  animation: fondoIntro 5.5s ease forwards;
+}
+
+@keyframes fondoIntro {
+  0%   { background: #000; }
+  70%  { background: rgba(0,0,0,1); }
+  100% { background: rgba(0,0,0,0); }
+}
+
+#intro-texto {
+  font-family: 'Great Vibes', cursive;
+  color: #f4e8d8;
+  text-align: center;
+  padding: 0 20px;
+  font-size: 2.2rem;
+  opacity: 0;
+  text-shadow:
+    0 0 15px rgba(255, 225, 180, 0.6),
+    0 0 35px rgba(255, 200, 140, 0.35);
+  animation: apareceYCrece 5.5s ease forwards;
+}
+
+@keyframes apareceYCrece {
+  0%   { opacity: 0; transform: scale(0.6); }
+  20%  { opacity: 1; transform: scale(1); }
+  35%  { opacity: 1; transform: scale(1.35); }
+  70%  { opacity: 1; transform: scale(1.35); }
+  100% { opacity: 0; transform: scale(1.6); }
+}
+
+@media (min-width: 600px) {
+  #intro-texto { font-size: 4rem; }
+}
+
+/* Cuando el JS termina la intro, oculta el bloque para que no
+   bloquee interacciones ni quede un div fantasma encima */
+#intro.oculto {
+  display: none;
+}
+
+/* ============================================
+   BOTÓN DE SONIDO (fallback si el navegador bloquea el autoplay)
+   ============================================ */
+#boton-sonido {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 30;
+  padding: 10px 18px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 225, 190, 0.4);
+  background: rgba(0, 0, 0, 0.55);
+  color: #f4e8d8;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 18px rgba(255, 210, 160, 0.25);
+  transition: opacity 0.4s ease, transform 0.2s ease;
+  display: none; /* el JS lo muestra solo si hace falta */
+}
+
+#boton-sonido:hover {
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.75);
+}
+
+#boton-sonido.oculto {
+  opacity: 0;
+  pointer-events: none;
+}

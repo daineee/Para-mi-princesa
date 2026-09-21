@@ -1,0 +1,11 @@
+Coloca aquí tus fotos (jpg, png, webp, gif).
+
+Después, en la carpeta principal del proyecto, ejecuta:
+
+  - Windows:      doble clic en "generar-lista.bat"
+  - Mac / Linux:  en una terminal, "bash generar-lista.sh"
+
+Eso escribe automáticamente el archivo "lista.js" con los nombres de
+todas tus fotos. No necesitas escribir nada a mano.
+
+Cada vez que agregues o quites fotos, vuelve a ejecutar el script.

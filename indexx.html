@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia</title>
+
+<!-- Fuente elegante para el mensaje inicial -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Capa de fondo con estrellas / partículas decorativas -->
+  <canvas id="particulas"></canvas>
+
+  <!-- Contenedor donde caen las fotos -->
+  <div id="lluvia-fotos"></div>
+
+  <!-- Viñeta oscura decorativa -->
+  <div class="vineta"></div>
+
+  <!-- Mensaje de apertura -->
+  <div id="intro">
+    <p id="intro-texto">Aquí está toda nuestra historia</p>
+  </div>
+
+  <!-- Canción de fondo -->
+  <audio id="musica-fondo" src="audio/beabadoobee - Glue Song.mp3" loop preload="auto"></audio>
+
+  <!-- Botón de sonido (aparece solo si el navegador bloquea el autoplay) -->
+  <button id="boton-sonido" aria-label="Activar música">🔇 Activar música</button>
+
+  <!-- Lista de fotos generada automáticamente (ver generar-lista) -->
+  <script src="img/lista.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
